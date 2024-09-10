@@ -35,11 +35,18 @@
           options.tagsPosition,
           tagsCollection
         );
+
+        // Appliquer le style initial pour le bouton "Tous"
+        $(".tags-bar .nav-link[data-images-toggle='all']").addClass("active-tag").css({
+          "background-color": "#beb45a",  // Nouvelle couleur de fond
+          "color": "#fff"                // Nouvelle couleur du texte
+        });
       }
 
       $(this).fadeIn(500);
     });
   };
+
   $.fn.mauGallery.defaults = {
     columns: 3,
     lightBox: true,
@@ -48,6 +55,7 @@
     tagsPosition: "bottom",
     navigation: true
   };
+
   $.fn.mauGallery.listeners = function(options) {
     $(".gallery-item").on("click", function() {
       if (options.lightBox && $(this).prop("tagName") === "IMG") {
@@ -65,6 +73,7 @@
       $.fn.mauGallery.methods.nextImage(options.lightboxId)
     );
   };
+
   $.fn.mauGallery.methods = {
     createRowWrapper(element) {
       if (
@@ -207,7 +216,7 @@
                                 ? '<div class="mg-prev" style="cursor:pointer;position:absolute;top:50%;left:-15px;background:white;"><</div>'
                                 : '<span style="display:none;" />'
                             }
-                            <img class="lightboxImage img-fluid" alt="Contenu de l'image affichée dans la modale au clique"/>
+                            <img class="lightboxImage img-fluid" alt="Contenu de l\'image affichée dans la modale au clique"/>
                             ${
                               navigation
                                 ? '<div class="mg-next" style="cursor:pointer;position:absolute;top:50%;right:-15px;background:white;}">></div>'
@@ -260,4 +269,36 @@
       });
     }
   };
+
+  $.fn.mauGallery.methods.filterByTag = function() {
+    if ($(this).hasClass("active-tag")) {
+      return;
+    }
+    $(".active-tag").removeClass("active active-tag").css({
+      "background-color": "",  // Réinitialiser la couleur de fond
+      "color": ""              // Réinitialiser la couleur du texte
+    });
+    $(this).addClass("active-tag").css({
+      "background-color": "#beb45a",  // Nouvelle couleur de fond
+      "color": "#fff"                // Nouvelle couleur du texte
+    });
+  
+    var tag = $(this).data("images-toggle");
+  
+    $(".gallery-item").each(function() {
+      $(this)
+        .parents(".item-column")
+        .hide();
+      if (tag === "all") {
+        $(this)
+          .parents(".item-column")
+          .show(300);
+      } else if ($(this).data("gallery-tag") === tag) {
+        $(this)
+          .parents(".item-column")
+          .show(300);
+      }
+    });
+  };
+  
 })(jQuery);

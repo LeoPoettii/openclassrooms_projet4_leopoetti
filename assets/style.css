@@ -30,6 +30,10 @@ nav ul {
 	margin-bottom: 0;
 }
 
+.active-tag {
+	border: 2px solid red;
+}
+
 nav li {
 	padding-inline: 10px;
 }
@@ -37,6 +41,10 @@ nav li {
 nav a {
 	text-decoration: none;
 	color: #000
+}
+
+.nav-link {
+	color: #000;
 }
 
 .social-link img {
