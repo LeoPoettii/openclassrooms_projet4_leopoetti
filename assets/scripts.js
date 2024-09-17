@@ -14,3 +14,5 @@ $(document).ready(function() {
     });
 });
 
+let allPicture = document.querySelectorAll('.gallery-item');
+console.log(allPicture);
