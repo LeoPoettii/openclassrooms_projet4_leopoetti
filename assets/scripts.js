@@ -13,6 +13,3 @@ $(document).ready(function() {
         tagsPosition: 'top'
     });
 });
-
-let allPicture = document.querySelectorAll('.gallery-item');
-console.log(allPicture);
